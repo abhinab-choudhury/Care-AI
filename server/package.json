@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -b",
     "start": "tsc -b && node ./dist/index.js",
-    "dev": "nodemon --exec ts-node ./src/index.ts",
+    "dev": "nodemon --exec ts-node ./api/index.ts",
     "clean": "rm -rf dist/ .logs/",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
@@ -31,7 +31,8 @@
     "groq-sdk": "^0.7.0",
     "mongoose": "^8.7.0",
     "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
