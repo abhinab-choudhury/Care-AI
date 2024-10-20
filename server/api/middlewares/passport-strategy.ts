@@ -3,7 +3,7 @@ import {
   GoogleCallbackParameters,
   Strategy as GoogleStrategy
 } from 'passport-google-oauth20';
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '../utils/secrets';
+import { FRONTEND_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '../utils/secrets';
 import User from '../database/models/user.models';
 
 passport.use(
@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID as string,
       clientSecret: GOOGLE_CLIENT_SECRET as string,
-      callbackURL: '/api/v1/auth/google/callback',
+      callbackURL: `${FRONTEND_URL}/api/v1/auth/google/callback`,
       passReqToCallback: true
     },
     async function (
