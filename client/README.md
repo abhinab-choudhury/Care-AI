@@ -1,5 +1,13 @@
 # React + TypeScript + Vite
 
+## Try Implementing this in Front Page
+
+- [Step Wise guide Component](https://www.creative-tim.com/twcomponents/component/steps-with-directions)
+- [AI Chat INterface Boilerplate Code](https://www.creative-tim.com/twcomponents/component/shadcn-ui-input-component-horizon-ai-boilerplate)
+- [AI Chat Message Box](https://www.creative-tim.com/twcomponents/component/shadcn-ui-message-box-component-horizon-ai-boilerplate)
+
+
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
