@@ -38,7 +38,7 @@ const Index = () => {
               Empowering women's health with AI.
             </span>
             <p className='mb-8 text-4xl font-semibold text-pink-700 sm:text-5xl xl:text-6xl'>
-              Your health, your journey, your care
+              Your health, your journey, Our care
             </p>
             <Link to='/home'>
               <button className='rounded-full bg-pink-400 px-8 py-3 text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2'>

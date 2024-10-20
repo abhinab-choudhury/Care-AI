@@ -38,7 +38,7 @@ export function PCOD_Predictor() {
           <MoveRightIcon className="w-5" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-h-[70%] overflow-hidden">
+      <DialogContent className="sm:max-w-[425px] max-h-[70%] overflow-auto">
         <DialogHeader>
           <DialogTitle>PCOD/PCOS Predictor</DialogTitle>
           <DialogDescription>

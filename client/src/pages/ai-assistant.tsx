@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SendHorizontal, User, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import { GeneratingAnswer } from '@/components/loading';
 
@@ -115,7 +115,7 @@ const AI_Interface: React.FC = () => {
                     {message.type === 'generating' ? (
                       <GeneratingAnswer />
                     ) : (
-                      message.content
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
                     )}
                   </p>
                 </div>
