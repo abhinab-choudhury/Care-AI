@@ -13,7 +13,7 @@ interface Message {
 
 async function AIContent(input: String): Promise<Message> {
   const message:any = await axios.post(
-    `http://localhost:8080/api/v1/assistant/ask`,
+    `${import.meta.env.VITE_BACKEND_URL}/api/v1/assistant/ask`,
     {
       prompt: input,
     },
