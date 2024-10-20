@@ -62,6 +62,10 @@ db_connect().then(() => {
     res.status(200).json(new ApiResponse(200, 'Server is Healthy'));
     return;
   });
+  app.get('/', (req: Request, res: Response) => {
+    res.send("Hi!!");
+    return;
+  });
 });
 
 // Global Catch
