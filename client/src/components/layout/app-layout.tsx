@@ -12,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 import NavLinks from '../nav-link';
 import { FooterText } from '../footer';
 import { cn } from '@/lib/utils';
+import { Toaster } from '../ui/toaster';
 
 interface LinkItem {
   title: string;
@@ -123,6 +124,7 @@ export default function AppLayout() {
       <div className='border-t p-4'>
         <FooterText />
       </div>
+      <Toaster />
     </>
   );
 }

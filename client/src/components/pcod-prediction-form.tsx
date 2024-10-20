@@ -1,13 +1,14 @@
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -21,14 +22,10 @@ import {
 } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { MoveRightIcon } from 'lucide-react';
+import { Calculate_PCOD_Probability, PCODFormSchema } from '@/lib/utils';
+import { toast } from "@/hooks/use-toast"
 
-// Define the schema with Zod for form validation
-const FormSchema = z.object({
-  irregularCycles: z.enum(['Yes', 'No', 'Maybe']),
-  weightGain: z.enum(['Yes', 'No', 'Maybe']),
-  acne: z.enum(['Yes', 'No', 'Maybe']),
-  hairGrowth: z.enum(['Yes', 'No', 'Maybe']),
-});
+type FormFields = keyof z.infer<typeof PCODFormSchema>;
 
 export function PCOD_Predictor() {
   return (
@@ -56,171 +53,102 @@ export function PCOD_Predictor() {
 }
 
 export function PCOD_Prediction_Form() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof PCODFormSchema>>({
+    resolver: zodResolver(PCODFormSchema),
+    defaultValues: {
+      irregularMenstrualCycles: 'No',
+      weightGain: 'No',
+      acne: 'No',
+      hirsutism: 'No',
+      thinningHair: 'No',
+      ovulationIssues: 'No',
+      fertilityIssues: 'No',
+      insulinResistance: 'No',
+      fatigue: 'No',
+      mentalHealthSymptoms: 'No',
+      cystsInOvaries: 'No',
+      severeCondition: 'No',
+    },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof PCODFormSchema>) {
     console.log(data); // Handle form submission
+    const probability = Calculate_PCOD_Probability(data);
+    toast({
+      title: "PCOD Probability",
+      description: `${probability.probabilityPCOD || 0.00}% - Please note that this is not a 100% guarantee of diagnosis.`,
+    })
   }
+
+  const fields: { name: FormFields; label: string }[] = [
+    {
+      name: 'irregularMenstrualCycles',
+      label: 'Do you have irregular menstrual cycles?',
+    },
+    { name: 'weightGain', label: 'Have you experienced weight gain?' },
+    { name: 'acne', label: 'Do you have acne?' },
+    { name: 'hirsutism', label: 'Do you have excess hair growth (hirsutism)?' },
+    { name: 'thinningHair', label: 'Do you have thinning hair or hair loss?' },
+    { name: 'ovulationIssues', label: 'Do you experience ovulation issues?' },
+    { name: 'fertilityIssues', label: 'Do you have fertility issues?' },
+    { name: 'insulinResistance', label: 'Do you have insulin resistance?' },
+    { name: 'fatigue', label: 'Do you often feel fatigued?' },
+    {
+      name: 'mentalHealthSymptoms',
+      label: 'Do you experience mental health symptoms?',
+    },
+    { name: 'cystsInOvaries', label: 'Do you have cysts in your ovaries?' },
+    { name: 'severeCondition', label: 'Is your condition severe?' },
+  ];
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-6'>
-        {/* Irregular Menstrual Cycles Question */}
-        <FormField
-          control={form.control}
-          name='irregularCycles'
-          render={({ field }) => (
-            <FormItem className='space-y-3'>
-              <FormLabel>Do you have irregular menstrual cycles?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className='flex flex-col space-y-1'
-                >
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Yes' />
-                    </FormControl>
-                    <FormLabel>Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='No' />
-                    </FormControl>
-                    <FormLabel>No</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Maybe' />
-                    </FormControl>
-                    <FormLabel>Maybe</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Weight Gain Question */}
-        <FormField
-          control={form.control}
-          name='weightGain'
-          render={({ field }) => (
-            <FormItem className='space-y-3'>
-              <FormLabel>Have you experienced weight gain?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className='flex flex-col space-y-1'
-                >
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Yes' />
-                    </FormControl>
-                    <FormLabel>Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='No' />
-                    </FormControl>
-                    <FormLabel>No</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Maybe' />
-                    </FormControl>
-                    <FormLabel>Maybe</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Acne Question */}
-        <FormField
-          control={form.control}
-          name='acne'
-          render={({ field }) => (
-            <FormItem className='space-y-3'>
-              <FormLabel>Do you have acne?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className='flex flex-col space-y-1'
-                >
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Yes' />
-                    </FormControl>
-                    <FormLabel>Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='No' />
-                    </FormControl>
-                    <FormLabel>No</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Maybe' />
-                    </FormControl>
-                    <FormLabel>Maybe</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Excess Hair Growth Question */}
-        <FormField
-          control={form.control}
-          name='hairGrowth'
-          render={({ field }) => (
-            <FormItem className='space-y-3'>
-              <FormLabel>Do you have excess hair growth (hirsutism)?</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className='flex flex-col space-y-1'
-                >
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Yes' />
-                    </FormControl>
-                    <FormLabel>Yes</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='No' />
-                    </FormControl>
-                    <FormLabel>No</FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3'>
-                    <FormControl>
-                      <RadioGroupItem value='Maybe' />
-                    </FormControl>
-                    <FormLabel>Maybe</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <DialogFooter>
-          <Button type='submit'>Submit</Button>
+        {fields.map((field, idx) => (
+          <FormField
+            key={idx}
+            control={form.control}
+            name={field.name}
+            render={({ field: formField }) => (
+              <FormItem className='space-y-3'>
+                <FormLabel>{field.label}</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={formField.onChange}
+                    defaultValue={formField.value}
+                    className='flex flex-col space-y-1'
+                  >
+                    <FormItem className='flex items-center space-x-3'>
+                      <FormControl>
+                        <RadioGroupItem value='Yes' />
+                      </FormControl>
+                      <FormLabel>Yes</FormLabel>
+                    </FormItem>
+                    <FormItem className='flex items-center space-x-3'>
+                      <FormControl>
+                        <RadioGroupItem value='No' />
+                      </FormControl>
+                      <FormLabel>No</FormLabel>
+                    </FormItem>
+                    <FormItem className='flex items-center space-x-3'>
+                      <FormControl>
+                        <RadioGroupItem value='Sometimes' />
+                      </FormControl>
+                      <FormLabel>Sometimes</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
+        <DialogFooter >
+          <DialogClose asChild>
+            <Button type="submit">
+              Submit
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </form>
     </Form>

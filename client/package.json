@@ -21,6 +21,7 @@
     "@radix-ui/react-radio-group": "^1.2.1",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.2",
     "@splinetool/runtime": "^1.9.28",
     "@tabler/icons-react": "^3.19.0",
     "axios": "^1.7.7",
