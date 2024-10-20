@@ -12,7 +12,7 @@ interface Message {
 }
 
 async function AIContent(input: String): Promise<Message> {
-  const message: Object = await axios.post(
+  const message:any = await axios.post(
     `http://localhost:8080/api/v1/assistant/ask`,
     {
       prompt: input,
