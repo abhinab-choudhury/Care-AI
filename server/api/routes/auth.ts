@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import passport from 'passport';
-import './../middlewares/passport-strategy';
+import '../middlewares/passport-strategy';
 import { FRONTEND_URL } from '../utils/secrets';
 
 const router = express.Router();
