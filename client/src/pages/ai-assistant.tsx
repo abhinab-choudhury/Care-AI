@@ -5,29 +5,11 @@ import { SendHorizontal, User, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import axios from 'axios';
+import { GeneratingAnswer } from '@/components/loading';
 
 interface Message {
-  type: 'user' | 'ai';
+  type: 'user' | 'ai' | 'generating';
   content: string;
-}
-
-async function AIContent(input: String): Promise<Message> {
-  const message:any = await axios.post(
-    `${import.meta.env.VITE_BACKEND_URL}/api/v1/assistant/ask`,
-    {
-      prompt: input,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  console.log('Message', message);
-  return {
-    type: 'ai',
-    content: message.data.data.response,
-  };
 }
 
 const AI_Interface: React.FC = () => {
@@ -41,12 +23,58 @@ const AI_Interface: React.FC = () => {
   //   };
   //   loadMessages();
   // },[]);
+  async function AIContent(input: string) {
+    try {
+      const message: any = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/assistant/ask`,
+        {
+          prompt: input,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log('AI Response Message', message);
+
+      setMessages((prevMessages) => {
+        const updatedMessages = prevMessages.slice(0, -1);
+
+        return [
+          ...updatedMessages,
+          {
+            type: 'ai',
+            content: message.data.data.response,
+          },
+        ];
+      });
+    } catch (error) {
+      setMessages((prevMessages) => {
+        const updatedMessages = prevMessages.slice(0, -1);
+
+        return [
+          ...updatedMessages,
+          {
+            type: 'ai',
+            content: 'Error Occurred',
+          },
+        ];
+      });
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim()) {
-      const AI_Response = await AIContent(input);
-      setMessages([...messages, { type: 'user', content: input }, AI_Response]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: 'user', content: input },
+        { type: 'generating', content: '' },
+      ]);
+      setInput('');
+
+      await AIContent(input);
       setInput('');
     }
   };
@@ -66,13 +94,13 @@ const AI_Interface: React.FC = () => {
           {messages.map((message: Message, index: number) => (
             <div
               key={index}
-              className={`flex ${message.type === 'user' ? 'justify-start' : 'justify-end'}`}
+              className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`flex max-w-[90%] md:max-w-[80%] ${message.type === 'user' ? 'flex-row' : 'flex-row-reverse'}`}
+                className={`flex max-w-[90%] md:max-w-[80%] ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
               >
                 <div
-                  className={`flex h-fit w-fit items-center justify-center rounded-full p-2 ${message.type === 'user' ? 'ml-2 bg-black' : 'mr-2 bg-pink-500'}`}
+                  className={`mx-2 flex h-fit w-fit items-center justify-center rounded-full p-2 ${message.type === 'user' ? 'bg-black' : 'mr-2 bg-pink-500'}`}
                 >
                   {message.type === 'user' ? (
                     <User className='h-5 w-5 text-white' />
@@ -83,7 +111,13 @@ const AI_Interface: React.FC = () => {
                 <div
                   className={`rounded-lg p-3 ${message.type === 'user' ? 'bg-gray-100' : 'bg-pink-100'}`}
                 >
-                  <p className='text-sm'>{message.content}</p>
+                  <p className='text-sm'>
+                    {message.type === 'generating' ? (
+                      <GeneratingAnswer />
+                    ) : (
+                      message.content
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
@@ -94,7 +128,7 @@ const AI_Interface: React.FC = () => {
             <form onSubmit={handleSubmit} className='flex space-x-2'>
               <Input
                 className='flex-1'
-                placeholder='Type a message...'
+                placeholder="Hey..You're strong"
                 value={input}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setInput(e.target.value)

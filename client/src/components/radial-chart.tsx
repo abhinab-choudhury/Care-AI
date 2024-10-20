@@ -18,28 +18,46 @@ import {
 } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 
-export const radialDescription = 'A radial chart with text';
+export const radialDescription = 'Menstrual cycle progress';
 
-const radialChartData = [
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
+const cycleData = [
+  { phase: 'Menstrual Phase', days: 5, fill: 'var(--color-menstrual)' },
+  { phase: 'Follicular Phase', days: 8, fill: 'var(--color-follicular)' },
+  { phase: 'Ovulation Phase', days: 2, fill: 'var(--color-ovulation)' },
+  { phase: 'Luteal Phase', days: 13, fill: 'var(--color-luteal)' },
 ];
 
 const radialConfig = {
-  visitors: {
-    label: 'Visitors',
+  days: {
+    label: 'Days',
   },
-  safari: {
-    label: 'Safari',
+  menstrual: {
+    label: 'Menstrual Phase',
+    color: 'hsl(var(--chart-1))',
+  },
+  follicular: {
+    label: 'Follicular Phase',
     color: 'hsl(var(--chart-2))',
+  },
+  ovulation: {
+    label: 'Ovulation Phase',
+    color: 'hsl(var(--chart-3))',
+  },
+  luteal: {
+    label: 'Luteal Phase',
+    color: 'hsl(var(--chart-4))',
   },
 } satisfies ChartConfig;
 
 export function RadialChart() {
+  const totalDays = 31; // Total cycle days
+  const currentDay = 28; // Assume it's Day 10 of the cycle
+
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
-        <CardTitle>Radial Chart - Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Cycle Progress - Radial Chart</CardTitle>
+        <CardDescription>Menstrual Cycle Phases</CardDescription>
       </CardHeader>
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
@@ -47,24 +65,27 @@ export function RadialChart() {
           className='mx-auto aspect-square max-h-[250px]'
         >
           <RadialBarChart
-            data={radialChartData}
+            data={cycleData}
             startAngle={0}
-            endAngle={250}
+            endAngle={(currentDay / totalDays) * 360} // Progress angle based on current day
             innerRadius={80}
             outerRadius={110}
           >
-            <PolarGrid
-              gridType='circle'
-              radialLines={false}
-              stroke='none'
-              className='first:fill-muted last:fill-background'
-              polarRadius={[86, 74]}
-            />
-            <RadialBar dataKey='visitors' background cornerRadius={10} />
+            <PolarGrid gridType='circle' radialLines={false} stroke='none' />
+            <RadialBar dataKey='days' background cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
+                    const currentPhase =
+                      currentDay <= 5
+                        ? 'Menstrual Phase'
+                        : currentDay <= 13
+                          ? 'Follicular Phase'
+                          : currentDay <= 15
+                            ? 'Ovulation Phase'
+                            : 'Luteal Phase';
+
                     return (
                       <text
                         x={viewBox.cx}
@@ -77,14 +98,14 @@ export function RadialChart() {
                           y={viewBox.cy}
                           className='fill-foreground text-4xl font-bold'
                         >
-                          {radialChartData[0].visitors.toLocaleString()}
+                          {currentDay} / {totalDays}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className='fill-muted-foreground'
+                          className='fill-muted-foreground text-sm'
                         >
-                          Visitors
+                          {currentPhase}
                         </tspan>
                       </text>
                     );
@@ -97,10 +118,10 @@ export function RadialChart() {
       </CardContent>
       <CardFooter className='flex-col gap-2 text-sm'>
         <div className='flex items-center gap-2 font-medium leading-none'>
-          Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
+          {currentDay} days completed in the current cycle
         </div>
-        <div className='leading-none text-muted-foreground'>
-          Showing total visitors for the last 6 months
+        <div className='text-center leading-none text-muted-foreground'>
+          Showing cycle progress for the ongoing menstrual cycle
         </div>
       </CardFooter>
     </Card>

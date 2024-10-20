@@ -63,7 +63,7 @@ db_connect().then(() => {
     return;
   });
   app.get('/', (req: Request, res: Response) => {
-    res.send("Hi!!");
+    res.send('Hi!!');
     return;
   });
 });

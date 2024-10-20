@@ -1,13 +1,15 @@
 import { Button } from './ui/button';
 import Google_Logo from '@/assets/google-logo.svg';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const LoginBtn = () => {
   return (
     <Button
       variant={'outline'}
       onClick={async () => {
         window.open(
-          `${import.meta.env.BACKEND_URL}/api/v1/auth/google`,
+          `${BASE_URL}/api/v1/auth/google`,
           '_self'
         );
       }}

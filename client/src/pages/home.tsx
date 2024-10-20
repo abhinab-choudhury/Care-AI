@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import ai_chatbot from '@/assets/ai-assistent.jpg';
 import symptoms from '@/assets/pcos.png';
 import video_call from '@/assets/vidoe-call.jpg';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -56,44 +57,43 @@ export default function Home() {
 
         <section className='mx-auto mb-10 flex max-w-7xl'>
           <div className='flex w-full flex-col items-center justify-center gap-10 align-middle md:flex-row'>
-            <div className='flex flex-col items-center'>
-              <img
-                src={ai_chatbot}
-                alt='AI assisting healthcare professionals'
-                className='rounded-3xl border backdrop-blur-sm'
-              />
-              <p className='p-3 text-center'>
-                Revolutionize healthcare with AI-powered diagnostics and
-                predictions. Our platform ensures timely and accurate health
-                condition analysis tailored to each individual.
-              </p>
-            </div>
+            <Link to='/home/ai-health-assistant'>
+              <div className='flex flex-col items-center'>
+                <img
+                  src={ai_chatbot}
+                  alt='AI assisting healthcare professionals'
+                  className='rounded-3xl border backdrop-blur-sm h-[230px] w-[380px]'
+                />
+                <p className='p-3 text-center text-md font-semibold'>
+                  AI-powered Chat Assistance
+                </p>
+              </div>
+            </Link>
+            <Link to='/home/cycle-tracker'>
+              <div className='flex flex-col items-center'>
+                <img
+                  src={symptoms}
+                  alt='Woman tracking health on a mobile app'
+                  className='rounded-3xl border backdrop-blur-sm h-[230px] w-[380px]'
+                />
+                <p className='p-3 text-center text-md font-semibold'>
+                  Health Detection - PCOD / PCOS / Menstrual-Cycle
+                </p>
+              </div>
+            </Link>
 
-            <div className='flex flex-col items-center'>
-              <img
-                src={symptoms}
-                alt='Woman tracking health on a mobile app'
-                className='rounded-3xl border backdrop-blur-sm'
-              />
-              <p className='p-3 text-center'>
-                Empower women with personalized health tracking. Our AI system
-                helps monitor menstrual cycles and predict potential conditions
-                like PCOD, bringing peace of mind.
-              </p>
-            </div>
-
-            <div className='flex flex-col items-center'>
-              <img
-                src={video_call}
-                alt='Doctor and patient in a virtual consultation'
-                className='rounded-3xl border backdrop-blur-sm'
-              />
-              <p className='p-3 text-center'>
-                Experience seamless virtual consultations. Our platform connects
-                you with specialized doctors for expert advice, all from the
-                comfort of your home.
-              </p>
-            </div>
+            <Link to='/home/video-consultations'>
+              <div className='flex flex-col items-center'>
+                <img
+                  src={video_call}
+                  alt='Doctor and patient in a virtual consultation'
+                 className='rounded-3xl border backdrop-blur-sm h-[230px] w-[380px]'
+                />
+                <p className='p-3 text-center text-md font-semibold'>
+                  Virtual Consultation
+                </p>
+              </div>
+            </Link>
           </div>
         </section>
       </motion.div>

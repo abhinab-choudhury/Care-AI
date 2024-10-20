@@ -18,52 +18,42 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
-export const description = 'A donut chart with text';
-
 const chartData = [
-  { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 190, fill: 'var(--color-other)' },
+  { phase: 'Menstrual', duration: 5, fill: 'var(--color-menstrual)' },
+  { phase: 'Follicular', duration: 9, fill: 'var(--color-follicular)' },
+  { phase: 'Ovulation', duration: 2, fill: 'var(--color-ovulation)' },
+  { phase: 'Luteal', duration: 12, fill: 'var(--color-luteal)' },
 ];
 
 const chartConfig = {
-  visitors: {
-    label: 'Visitors',
-  },
-  chrome: {
-    label: 'Chrome',
+  menstrual: {
+    label: 'Menstrual Phase',
     color: 'hsl(var(--chart-1))',
   },
-  safari: {
-    label: 'Safari',
+  follicular: {
+    label: 'Follicular Phase',
     color: 'hsl(var(--chart-2))',
   },
-  firefox: {
-    label: 'Firefox',
+  ovulation: {
+    label: 'Ovulation Phase',
     color: 'hsl(var(--chart-3))',
   },
-  edge: {
-    label: 'Edge',
+  luteal: {
+    label: 'Luteal Phase',
     color: 'hsl(var(--chart-4))',
-  },
-  other: {
-    label: 'Other',
-    color: 'hsl(var(--chart-5))',
   },
 } satisfies ChartConfig;
 
 export function PieChat() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  const totalDays = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.duration, 0);
   }, []);
 
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Menstrual Cycle Phases</CardTitle>
+        <CardDescription>Typical 28-Day Cycle Breakdown</CardDescription>
       </CardHeader>
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
@@ -77,8 +67,8 @@ export function PieChat() {
             />
             <Pie
               data={chartData}
-              dataKey='visitors'
-              nameKey='browser'
+              dataKey='duration'
+              nameKey='phase'
               innerRadius={60}
               strokeWidth={5}
             >
@@ -97,14 +87,14 @@ export function PieChat() {
                           y={viewBox.cy}
                           className='fill-foreground text-3xl font-bold'
                         >
-                          {totalVisitors.toLocaleString()}
+                          {totalDays} Days
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className='fill-muted-foreground'
                         >
-                          Visitors
+                          Cycle Length
                         </tspan>
                       </text>
                     );
@@ -117,10 +107,11 @@ export function PieChat() {
       </CardContent>
       <CardFooter className='flex-col gap-2 text-sm'>
         <div className='flex items-center gap-2 font-medium leading-none'>
-          Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
+          Average cycle length: 28 days{' '}
+          <span className='text-muted-foreground'>(Typical)</span>
         </div>
-        <div className='leading-none text-muted-foreground'>
-          Showing total visitors for the last 6 months
+        <div className='text-center leading-none text-muted-foreground'>
+          Breakdown of different phases of a 28-day cycle
         </div>
       </CardFooter>
     </Card>

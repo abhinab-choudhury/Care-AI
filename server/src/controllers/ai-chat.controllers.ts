@@ -8,18 +8,16 @@ import { Stream } from 'groq-sdk/lib/streaming';
 
 const groq = new Groq({ apiKey: GROQ_API_KEY });
 
-export async function handleQuery() {
-
-}
+export async function handleQuery() {}
 
 interface ChatMessage {
-  role: 'system' | 'user' | 'assistant',
+  role: 'system' | 'user' | 'assistant';
   content: string;
 }
 
 interface CompletionOptions {
-  model: string,
-  stop: null,
+  model: string;
+  stop: null;
   temperature: number;
   max_tokens: number;
   top_p: number;
@@ -55,41 +53,40 @@ Format responses with:
 - References to medical guidelines when applicable
 - Recommendations for professional medical consultation`;
 
-
-async function getGynecologyAssistantResponse( 
-  prompt: string, 
-  customOptions:CompletionOptions) {
-    try {
-      const messages:ChatMessage[] = [
-        {
-          role:'system',
-          content: SYSTEM_PROMPT
-        },
-        {
-          role:'user',
-          content: prompt
-        }
-      ];
-
-      const completionResponse:any = await groq.chat.completions.create({
-        messages,
-        ...customOptions
-      });
-      
-      return {
-        success: true,
-        data: completionResponse.choices[0]?.message?.content,
-        error: null,
+async function getGynecologyAssistantResponse(
+  prompt: string,
+  customOptions: CompletionOptions
+) {
+  try {
+    const messages: ChatMessage[] = [
+      {
+        role: 'system',
+        content: SYSTEM_PROMPT
+      },
+      {
+        role: 'user',
+        content: prompt
       }
+    ];
 
-    } catch(error) {
-      console.log("Error in AI Gynecology Assistant :",error);
-      return {
-        success: false,
-        data: null,
-        error: error instanceof Error? error.message : "Unknown Error Occurred",
-      }
-    }  
+    const completionResponse: any = await groq.chat.completions.create({
+      messages,
+      ...customOptions
+    });
+
+    return {
+      success: true,
+      data: completionResponse.choices[0]?.message?.content,
+      error: null
+    };
+  } catch (error) {
+    console.log('Error in AI Gynecology Assistant :', error);
+    return {
+      success: false,
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown Error Occurred'
+    };
+  }
 }
 
 // POST
@@ -99,19 +96,15 @@ export async function getChatCompletion(
   _next: NextFunction
 ) {
   try {
-  
     const { prompt } = req.body; // "What are common symptoms of PCOS?"
-    const response = await getGynecologyAssistantResponse(
-      prompt,
-      { 
-        model: 'llama3-8b-8192',
-        temperature: 0.3,
-        max_tokens: 1024,
-        top_p: 1,
-        stop: null,
-        stream: false 
-      } 
-    );
+    const response = await getGynecologyAssistantResponse(prompt, {
+      model: 'llama3-8b-8192',
+      temperature: 0.3,
+      max_tokens: 1024,
+      top_p: 1,
+      stop: null,
+      stream: false
+    });
     // const completionResponse = await groq.chat.completions.create({
     //   messages: [
     //     {
@@ -133,11 +126,11 @@ export async function getChatCompletion(
     // });
     // const aiMessage = completionResponse.choices[0]?.message?.content || '';
 
-    res
-      .status(200)
-      .json(
-        new ApiResponse(200, 'AI Response Success', { response : response.success ? response.data : response.error })
-      );
+    res.status(200).json(
+      new ApiResponse(200, 'AI Response Success', {
+        response: response.success ? response.data : response.error
+      })
+    );
   } catch (error) {
     console.error('Error in AI Chat Completion:', error);
     res.status(500).json(new ApiError(500, 'Failed to generate AI response'));
@@ -146,7 +139,7 @@ export async function getChatCompletion(
 
 // GET
 export async function getAllChats(
-  req: Request,   
+  req: Request,
   res: Response,
   _next: NextFunction
 ) {
