@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,10 +7,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+} from '@/components/ui/dialog';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -18,27 +18,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { MoveRightIcon } from "lucide-react";
+} from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { MoveRightIcon } from 'lucide-react';
 
 // Define the schema with Zod for form validation
 const FormSchema = z.object({
-  irregularCycles: z.enum(["Yes", "No", "Maybe"]),
-  weightGain: z.enum(["Yes", "No", "Maybe"]),
-  acne: z.enum(["Yes", "No", "Maybe"]),
-  hairGrowth: z.enum(["Yes", "No", "Maybe"]),
+  irregularCycles: z.enum(['Yes', 'No', 'Maybe']),
+  weightGain: z.enum(['Yes', 'No', 'Maybe']),
+  acne: z.enum(['Yes', 'No', 'Maybe']),
+  hairGrowth: z.enum(['Yes', 'No', 'Maybe']),
 });
 
 export function PCOD_Predictor() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="border rounded-xl border-black my-3">
-          <MoveRightIcon className="w-5" />
+        <Button
+          variant='outline'
+          className='my-3 rounded-xl border border-black'
+        >
+          <MoveRightIcon className='w-5' />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-h-[70%] overflow-auto">
+      <DialogContent className='max-h-[70%] overflow-auto sm:max-w-[425px]'>
         <DialogHeader>
           <DialogTitle>PCOD/PCOS Predictor</DialogTitle>
           <DialogDescription>
@@ -63,35 +66,35 @@ export function PCOD_Prediction_Form() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-6'>
         {/* Irregular Menstrual Cycles Question */}
         <FormField
           control={form.control}
-          name="irregularCycles"
+          name='irregularCycles'
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className='space-y-3'>
               <FormLabel>Do you have irregular menstrual cycles?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1"
+                  className='flex flex-col space-y-1'
                 >
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Yes" />
+                      <RadioGroupItem value='Yes' />
                     </FormControl>
                     <FormLabel>Yes</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="No" />
+                      <RadioGroupItem value='No' />
                     </FormControl>
                     <FormLabel>No</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Maybe" />
+                      <RadioGroupItem value='Maybe' />
                     </FormControl>
                     <FormLabel>Maybe</FormLabel>
                   </FormItem>
@@ -105,31 +108,31 @@ export function PCOD_Prediction_Form() {
         {/* Weight Gain Question */}
         <FormField
           control={form.control}
-          name="weightGain"
+          name='weightGain'
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className='space-y-3'>
               <FormLabel>Have you experienced weight gain?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1"
+                  className='flex flex-col space-y-1'
                 >
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Yes" />
+                      <RadioGroupItem value='Yes' />
                     </FormControl>
                     <FormLabel>Yes</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="No" />
+                      <RadioGroupItem value='No' />
                     </FormControl>
                     <FormLabel>No</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Maybe" />
+                      <RadioGroupItem value='Maybe' />
                     </FormControl>
                     <FormLabel>Maybe</FormLabel>
                   </FormItem>
@@ -143,31 +146,31 @@ export function PCOD_Prediction_Form() {
         {/* Acne Question */}
         <FormField
           control={form.control}
-          name="acne"
+          name='acne'
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className='space-y-3'>
               <FormLabel>Do you have acne?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1"
+                  className='flex flex-col space-y-1'
                 >
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Yes" />
+                      <RadioGroupItem value='Yes' />
                     </FormControl>
                     <FormLabel>Yes</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="No" />
+                      <RadioGroupItem value='No' />
                     </FormControl>
                     <FormLabel>No</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Maybe" />
+                      <RadioGroupItem value='Maybe' />
                     </FormControl>
                     <FormLabel>Maybe</FormLabel>
                   </FormItem>
@@ -181,31 +184,31 @@ export function PCOD_Prediction_Form() {
         {/* Excess Hair Growth Question */}
         <FormField
           control={form.control}
-          name="hairGrowth"
+          name='hairGrowth'
           render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className='space-y-3'>
               <FormLabel>Do you have excess hair growth (hirsutism)?</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1"
+                  className='flex flex-col space-y-1'
                 >
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Yes" />
+                      <RadioGroupItem value='Yes' />
                     </FormControl>
                     <FormLabel>Yes</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="No" />
+                      <RadioGroupItem value='No' />
                     </FormControl>
                     <FormLabel>No</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-3">
+                  <FormItem className='flex items-center space-x-3'>
                     <FormControl>
-                      <RadioGroupItem value="Maybe" />
+                      <RadioGroupItem value='Maybe' />
                     </FormControl>
                     <FormLabel>Maybe</FormLabel>
                   </FormItem>
@@ -217,7 +220,7 @@ export function PCOD_Prediction_Form() {
         />
 
         <DialogFooter>
-          <Button type="submit">Submit</Button>
+          <Button type='submit'>Submit</Button>
         </DialogFooter>
       </form>
     </Form>

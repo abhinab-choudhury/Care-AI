@@ -8,10 +8,7 @@ const LoginBtn = () => {
     <Button
       variant={'outline'}
       onClick={async () => {
-        window.open(
-          `${BASE_URL}/api/v1/auth/google`,
-          '_self'
-        );
+        window.open(`${BASE_URL}/api/v1/auth/google`, '_self');
       }}
     >
       <img

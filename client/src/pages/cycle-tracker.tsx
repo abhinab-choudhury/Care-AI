@@ -44,9 +44,9 @@ export default function CycleDetection() {
       <div className='mx-auto my-20 flex flex-col items-center justify-center align-middle'>
         <h1 className='text-2xl'>Health Predictions</h1>
         <div className='m-10 mx-auto grid w-[65%] grid-cols-1 gap-10 md:grid-cols-2'>
-          <div className='rounded-xl border border-gray-600 p-8'>      
-            <strong>PCOD/PCOS Prediction Tool:</strong> Analyze your symptoms and
-            cycle patterns for early detection of PCOD/PCOS.
+          <div className='rounded-xl border border-gray-600 p-8'>
+            <strong>PCOD/PCOS Prediction Tool:</strong> Analyze your symptoms
+            and cycle patterns for early detection of PCOD/PCOS.
             <br />
             <PCOD_Predictor />
           </div>

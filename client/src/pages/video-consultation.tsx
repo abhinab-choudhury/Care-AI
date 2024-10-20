@@ -101,9 +101,7 @@ export default function VideoConsultation() {
                 />
               </div>
               <div className=''>
-                <p className='text-xl font-medium text-gray-700'>
-                  Shilpa Dash
-                </p>
+                <p className='text-xl font-medium text-gray-700'>Shilpa Dash</p>
                 <p className='mb-4 text-sm font-medium text-gray-500'>
                   Senior Gynecologist
                 </p>
@@ -145,9 +143,7 @@ export default function VideoConsultation() {
                 />
               </div>
               <div className=''>
-                <p className='text-xl font-medium text-gray-700'>
-                  Anuj Rawat
-                </p>
+                <p className='text-xl font-medium text-gray-700'>Anuj Rawat</p>
                 <p className='mb-4 text-sm font-medium text-gray-500'>
                   Junior Gynecologist
                 </p>

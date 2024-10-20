@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import avatarImage from '@/assets/background-img.jpg'; 
+import avatarImage from '@/assets/background-img.jpg';
 
 export default function Setting() {
   return (
@@ -50,7 +50,9 @@ export default function Setting() {
 
         {/* Last Care AI Chatbot Question */}
         <div className='mb-10'>
-          <h2 className='text-xl font-semibold'>Last Care AI Chatbot Interaction</h2>
+          <h2 className='text-xl font-semibold'>
+            Last Care AI Chatbot Interaction
+          </h2>
           <p className='mt-4 text-gray-600'>
             You asked: <strong>"What are common symptoms of PCOD?"</strong>
           </p>
@@ -76,7 +78,9 @@ export default function Setting() {
             Proceed with caution
           </p>
           <p className='mt-2'>
-            Make sure you have taken a backup of your account. We will completely wipe your data. There is no way to access your account after this action.
+            Make sure you have taken a backup of your account. We will
+            completely wipe your data. There is no way to access your account
+            after this action.
           </p>
           <button className='ml-auto text-sm font-semibold text-rose-600 underline decoration-2'>
             Continue with deletion
