@@ -1,4 +1,8 @@
 import { motion } from 'framer-motion';
+import doctor1 from '@/assets/doctor1.jpg';
+import doctor2 from '@/assets/doctor2.jpg';
+
+import { Link } from 'react-router-dom';
 
 export default function VideoConsultation() {
   return (
@@ -24,12 +28,12 @@ export default function VideoConsultation() {
             </h5>
             <div className='-mx-2 flex'>
               <div className='mt-3 px-2'>
-                <a
+                <Link
                   className='inline-flex items-center rounded-full border-2 border-pink-700 bg-white px-6 py-2 text-sm outline-none hover:border-pink-800 focus:border-pink-800'
-                  href='/start-consultation/'
+                  to='/start-consultation'
                 >
                   Start Consultation
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -92,31 +96,31 @@ export default function VideoConsultation() {
               <div className='mb-4 md:mb-0 md:mr-6'>
                 <img
                   className='h-56 rounded-lg object-cover md:w-56'
-                  src='https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60'
+                  src={doctor1}
                   alt=''
                 />
               </div>
               <div className=''>
                 <p className='text-xl font-medium text-gray-700'>
-                  James Edward
+                  Shilpa Dash
                 </p>
                 <p className='mb-4 text-sm font-medium text-gray-500'>
-                  Senior Editor
+                  Senior Gynecologist
                 </p>
                 <div className='flex space-x-2'>
                   <div className='flex flex-col items-center rounded-xl bg-gray-100 px-4 py-2'>
                     <p className='text-sm font-medium text-gray-500'>
                       Articles
                     </p>
-                    <p className='text-3xl font-medium text-gray-600'>13</p>
+                    <p className='text-3xl font-medium text-gray-600'>8</p>
                   </div>
                   <div className='flex flex-col items-center rounded-xl bg-gray-100 px-4 py-2'>
                     <p className='text-sm font-medium text-gray-500'>Papers</p>
-                    <p className='text-3xl font-medium text-gray-600'>7</p>
+                    <p className='text-3xl font-medium text-gray-600'>4</p>
                   </div>
                   <div className='flex flex-col items-center rounded-xl bg-gray-100 px-4 py-2'>
                     <p className='text-sm font-medium text-gray-500'>Callers</p>
-                    <p className='text-3xl font-medium text-gray-600'>2.5k</p>
+                    <p className='text-3xl font-medium text-gray-600'>9.5k</p>
                   </div>
                   <div className=''></div>
                 </div>
@@ -136,31 +140,31 @@ export default function VideoConsultation() {
               <div className='mb-4 md:mb-0 md:mr-6'>
                 <img
                   className='h-56 rounded-lg object-cover md:w-56'
-                  src='https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60'
+                  src={doctor2}
                   alt=''
                 />
               </div>
               <div className=''>
                 <p className='text-xl font-medium text-gray-700'>
-                  James Edward
+                  Anuj Rawat
                 </p>
                 <p className='mb-4 text-sm font-medium text-gray-500'>
-                  Senior Editor
+                  Junior Gynecologist
                 </p>
                 <div className='flex space-x-2'>
                   <div className='flex flex-col items-center rounded-xl bg-gray-100 px-4 py-2'>
                     <p className='text-sm font-medium text-gray-500'>
                       Articles
                     </p>
-                    <p className='text-3xl font-medium text-gray-600'>13</p>
+                    <p className='text-3xl font-medium text-gray-600'>42</p>
                   </div>
                   <div className='flex flex-col items-center rounded-xl bg-gray-100 px-4 py-2'>
                     <p className='text-sm font-medium text-gray-500'>Papers</p>
-                    <p className='text-3xl font-medium text-gray-600'>7</p>
+                    <p className='text-3xl font-medium text-gray-600'>17</p>
                   </div>
                   <div className='flex flex-col items-center rounded-xl bg-gray-100 px-4 py-2'>
                     <p className='text-sm font-medium text-gray-500'>Callers</p>
-                    <p className='text-3xl font-medium text-gray-600'>2.5k</p>
+                    <p className='text-3xl font-medium text-gray-600'>20.5k</p>
                   </div>
                   <div className=''></div>
                 </div>
