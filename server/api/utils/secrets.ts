@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const PORT = process.env.PORT || '8080';
+export const SERVER_URL = process.env.SERVER_URL || 'http://localhost:8080'
 export const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 export const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -15,6 +16,7 @@ export const DATABASE_NAME = process.env.DATABASE_NAME;
 
 const secrets = [
   'PORT',
+  'SERVER_URL',
   'FRONTEND_URL',
   'SESSION_SECRET',
   'OPENAI_API_KEY',
